@@ -1,0 +1,20 @@
+{{#operations}}{{#operation}}
+
+    lr_start_transaction("{{operationId}}");
+
+    web_custom_request("{{operationId}}",
+        "URL={{basePath}}{{path}}",
+        "Method={{httpMethod}}",
+        "TargetFrame=",
+        "EncType={{#consumes}}{{mediaType}}{{#hasMore}}, {{/hasMore}}{{/consumes}}",
+        "RecContentType={{#produces}}{{mediaType}}{{#hasMore}}, {{/hasMore}}{{/produces}}",
+        "Resource=0",
+        "Referer=",
+        "Mode=HTTP",
+        "Body="{{^vendorExtensions.x-request-example-application/json}},{{/vendorExtensions.x-request-example-application/json}}{{#vendorExtensions.x-request-example-application/json}}
+            {{&vendorExtensions.x-request-example-application/json}},{{/vendorExtensions.x-request-example-application/json}}
+        LAST);
+
+    lr_end_transaction("{{operationId}}", LR_AUTO);
+
+{{/operation}}{{/operations}}

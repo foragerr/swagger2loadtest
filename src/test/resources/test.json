@@ -1,0 +1,61 @@
+{
+   "swagger":"2.0",
+   "info":{
+      "description":"We Foo",
+      "version":"1.0",
+      "title":"Service REST API",
+      "termsOfService":"me@wherever.com",
+      "contact":{
+         "name":"Foundation team"
+      },
+      "license":{
+         "name":"API License",
+         "url":"API License URL"
+      }
+   },
+   "host":"localhost:8080",
+   "basePath":"/foo-service",
+   "tags":[
+      {
+         "name":"about-controller",
+         "description":"About Controller"
+      }
+   ],
+   "paths":{
+      "/about":{
+         "get":{
+            "tags":[
+               "about-controller"
+            ],
+            "summary":"getProperties",
+            "operationId":"getPropertiesUsingGET",
+            "consumes":[
+               "application/json"
+            ],
+            "produces":[
+               "*/*"
+            ],
+            "responses":{
+               "200":{
+                  "description":"OK",
+                  "schema":{
+                     "type":"object",
+                     "additionalProperties":{
+                        "type":"string"
+                     }
+                  }
+               },
+               "401":{
+                  "description":"Unauthorized"
+               },
+               "403":{
+                  "description":"Forbidden"
+               },
+               "404":{
+                  "description":"Not Found"
+               }
+            }
+         }
+      }
+   }
+}

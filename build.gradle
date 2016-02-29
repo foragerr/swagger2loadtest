@@ -1,0 +1,39 @@
+apply plugin: 'java'
+apply plugin: 'maven'
+apply plugin: 'application'
+
+group = 'net.foragerr.swagger2perftest'
+version = '1.0.0'
+
+description = """swagger2loadtest-swagger-codegen"""
+
+sourceCompatibility = 1.6
+targetCompatibility = 1.6
+
+repositories {
+     maven {url "http://repo.maven.apache.org/maven2" }
+}
+
+dependencies {
+    compile(group: 'io.swagger', name: 'swagger-codegen', version:'2.1.5')
+}
+
+
+//packaging tests
+task packageTests(type: Jar) {
+  from sourceSets.test.output
+  classifier = 'tests'
+}
+artifacts.archives packageTests
+
+
+mainClassName = "io.swagger.codegen.Codegen" 
+run{
+	if(System.getProperty("exec.args") != null) {
+		args System.getProperty("exec.args").split()
+	}else{
+		args    '-l','jmeter', \
+				'-i', 'http://ftc-lbjbahs301:8080/calculation-service/v2/api-docs', \
+				'-o', "$buildDir/out"
+	}
+}	
